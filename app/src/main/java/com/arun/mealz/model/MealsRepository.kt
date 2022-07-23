@@ -1,7 +1,7 @@
-package com.arun.mealz.ui.model
+package com.arun.mealz.model
 
-import com.arun.mealz.ui.model.api.MealsApiService
-import com.arun.mealz.ui.model.api.NetworkBuilder
+import com.arun.mealz.model.api.MealsApiService
+import com.arun.mealz.model.api.NetworkBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +27,7 @@ class MealsRepository(private val networkBuilder: NetworkBuilder = NetworkBuilde
             }
 
             override fun onFailure(call: Call<MealsCategoryResponse>, t: Throwable) {
-                //todo handle the error
+
             }
 
         })

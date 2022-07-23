@@ -1,6 +1,6 @@
-package com.arun.mealz.ui.model.api
+package com.arun.mealz.model.api
 
-import com.arun.mealz.ui.model.MealsCategoryResponse
+import com.arun.mealz.model.MealsCategoryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

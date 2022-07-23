@@ -1,4 +1,4 @@
-package com.arun.mealz.ui.model.api
+package com.arun.mealz.model.api
 
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory

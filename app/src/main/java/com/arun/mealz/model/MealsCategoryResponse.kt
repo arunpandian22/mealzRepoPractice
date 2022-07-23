@@ -1,4 +1,4 @@
-package com.arun.mealz.ui.model
+package com.arun.mealz.model
 
 import kotlinx.serialization.Serializable
 

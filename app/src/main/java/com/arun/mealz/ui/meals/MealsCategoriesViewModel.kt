@@ -1,8 +1,8 @@
 package com.arun.mealz.ui.meals
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.arun.mealz.ui.model.MealsRepository
+import com.arun.mealz.model.MealsCategoryResponse
+import com.arun.mealz.model.MealsRepository
 
 
 /**
@@ -12,9 +12,7 @@ class MealsCategoriesViewModel(private val mealsRepository: MealsRepository = Me
     ViewModel() {
     val tag = "MealsCategoriesViewModel"
 
-    fun getMeals() {
-         mealsRepository.getMeals() {
-            Log.d(tag, "response: ${it.categories.size}")
-        }
+    fun getMeals(successMealResponse: (MealsCategoryResponse) -> Unit) {
+         mealsRepository.getMeals(successMealResponse)
     }
 }
