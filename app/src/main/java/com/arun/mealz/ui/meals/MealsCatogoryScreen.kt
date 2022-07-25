@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import coil.transform.RoundedCornersTransformation
 import com.arun.mealz.model.MealsResponse
 import com.arun.mealz.ui.theme.MealzTheme
 
@@ -37,18 +36,18 @@ import com.arun.mealz.ui.theme.MealzTheme
  * A Compose function for the listing meals list
  */
 @Composable
-fun MealsCategoriesScreen() {
+fun MealsCategoriesScreen(navigationCallBack: (String) -> Unit) {
     val viewModel: MealsCategoriesViewModel = viewModel()
     val meals = viewModel.mealState.value
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         items(meals) { _mealsResponse ->
-            MealCategory(_mealsResponse)
+            MealCategory(_mealsResponse, navigationCallBack)
         }
     }
 }
 
 @Composable
-fun MealCategory(mealsResponse: MealsResponse) {
+fun MealCategory(mealsResponse: MealsResponse, navigationCallBack: (String) -> Unit) {
     var isExpanded by remember {
         mutableStateOf(false)
     }
@@ -58,13 +57,11 @@ fun MealCategory(mealsResponse: MealsResponse) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 16.dp)
+            .clickable { navigationCallBack.invoke(mealsResponse.id) }
     ) {
         Row(modifier = Modifier.animateContentSize()) {
             val request =
-                ImageRequest.Builder(LocalContext.current).data(mealsResponse.imageUrl)
-                    .transformations(
-                        RoundedCornersTransformation()
-                    ).build()
+                ImageRequest.Builder(LocalContext.current).data(mealsResponse.imageUrl).build()
             Image(
                 rememberAsyncImagePainter(model = request),
                 contentDescription = "",
@@ -112,6 +109,8 @@ fun MealCategory(mealsResponse: MealsResponse) {
 @Composable
 fun DefaultPreview() {
     MealzTheme {
-        MealsCategoriesScreen()
+        MealsCategoriesScreen(){
+
+        }
     }
 }

@@ -12,10 +12,9 @@ import kotlinx.coroutines.launch
 /**
  * Created by Arun Pandian  on 23/07/22.
  */
-class MealsCategoriesViewModel(private val mealsRepository: MealsRepository = MealsRepository()) :
+class MealsCategoriesViewModel(private val mealsRepository: MealsRepository = MealsRepository.getInstance()) :
     ViewModel() {
     val tag = "MealsCategoriesViewModel"
-
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
