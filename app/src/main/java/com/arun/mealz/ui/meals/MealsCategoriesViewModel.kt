@@ -1,8 +1,12 @@
 package com.arun.mealz.ui.meals
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.arun.mealz.model.MealsCategoryResponse
+import androidx.lifecycle.viewModelScope
 import com.arun.mealz.model.MealsRepository
+import com.arun.mealz.model.MealsResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 /**
@@ -12,7 +16,19 @@ class MealsCategoriesViewModel(private val mealsRepository: MealsRepository = Me
     ViewModel() {
     val tag = "MealsCategoriesViewModel"
 
-    fun getMeals(successMealResponse: (MealsCategoryResponse) -> Unit) {
-         mealsRepository.getMeals(successMealResponse)
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            val meals = getMeals()
+            mealState.value = meals
+        }
     }
+
+    val mealState =
+        mutableStateOf(emptyList<MealsResponse>())
+
+    suspend fun getMeals(): List<MealsResponse> {
+        return mealsRepository.getMeals().categories
+    }
+
 }

@@ -10,7 +10,7 @@ import retrofit2.http.GET
  */
 interface MealsApiService {
     @GET("v1/1/categories.php")
-    fun getMeals(): Call<MealsCategoryResponse>
+    suspend fun getMeals(): MealsCategoryResponse
 }
 
 
